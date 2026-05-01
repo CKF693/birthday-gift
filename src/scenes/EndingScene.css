@@ -1,0 +1,46 @@
+.ending-scene {
+  background-color: #111127;
+  transform: rotate(360deg);
+  border: 0px solid rgb(239, 68, 68);
+}
+
+.ending-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ending-content {
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ending-text {
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--text-light);
+  text-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+}
+
+.ending-final {
+  margin-top: 24px;
+}
+
+.ending-emoji {
+  font-size: 64px;
+  animation: celebrate 2s ease-in-out infinite;
+  text-align: justify;
+  background-color: var(--tw-ring-color);
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(5deg); }
+}
