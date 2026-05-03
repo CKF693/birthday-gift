@@ -1,30 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { CONFIG } from "../data/config";
 import "./VideoScene.css";
 
 export default function VideoScene({ nextScene }) {
   const videoRef = useRef(null);
-  const [showPoster, setShowPoster] = useState(true);
-  const [videoError, setVideoError] = useState(false);
-
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((err) => {
-        console.error("Video play error:", err);
-        setVideoError(true);
-      });
-      setShowPoster(false);
-    }
-  };
 
   const handleVideoEnd = () => {
     nextScene();
-  };
-
-  const handleVideoError = () => {
-    setVideoError(true);
-    console.error("Video load error");
   };
 
   const handleSkip = () => {
@@ -42,43 +25,16 @@ export default function VideoScene({ nextScene }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {showPoster ? (
-          <motion.div
-            className="video-poster"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            onClick={handlePlay}
-          >
-            {videoError ? (
-              <>
-                <div className="error-icon">⚠️</div>
-                <p className="video-hint">视频加载失败</p>
-                <p className="video-error-hint">请检查网络后重试</p>
-              </>
-            ) : (
-              <>
-                <div className="play-button">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="video-hint">点击播放视频</p>
-              </>
-            )}
-          </motion.div>
-        ) : (
-          <video
-            ref={videoRef}
-            className="video-fullscreen"
-            onEnded={handleVideoEnd}
-            onError={handleVideoError}
-            playsInline
-            controls
-          >
-            <source src={CONFIG.videoSrc} type="video/mp4" />
-          </video>
-        )}
+        <video
+          ref={videoRef}
+          className="video-fullscreen"
+          controls
+          autoPlay
+          onEnded={handleVideoEnd}
+          src={CONFIG.videoSrc}
+        >
+          您的浏览器不支持视频播放
+        </video>
       </motion.div>
 
       <motion.button
