@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import "./EndingScene.css";
 
 const FINAL_TEXT = [
-  "希望你可以开心的生活",
   "希望你能乐观的面对一切",
   "愿你所有的愿望都能实现",
+  "平安喜乐，万事如意",
   "生日快乐 🎂🎉",
 ];
 

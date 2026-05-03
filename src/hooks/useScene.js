@@ -6,6 +6,7 @@ const SCENES = [
   "memory",
   "confession",
   "exam",
+  "video",
   "ending",
 ];
 

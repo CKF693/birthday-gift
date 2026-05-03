@@ -4,6 +4,7 @@ import WelcomeScene from "./scenes/WelcomeScene";
 import MemoryScene from "./scenes/MemoryScene";
 import ConfessionScene from "./scenes/ConfessionScene";
 import ExamScene from "./scenes/ExamScene";
+import VideoScene from "./scenes/VideoScene";
 import EndingScene from "./scenes/EndingScene";
 import MusicPlayer from "./components/MusicPlayer";
 import VideoBackground from "./components/VideoBackground";
@@ -15,6 +16,7 @@ const SCENE_MAP = {
   memory: MemoryScene,
   confession: ConfessionScene,
   exam: ExamScene,
+  video: VideoScene,
   ending: EndingScene,
 };
 
