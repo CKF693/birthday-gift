@@ -5,19 +5,26 @@ import "./VideoScene.css";
 
 export default function VideoScene({ nextScene }) {
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [showPoster, setShowPoster] = useState(true);
+  const [videoError, setVideoError] = useState(false);
 
   const handlePlay = () => {
     if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      videoRef.current.play().catch((err) => {
+        console.error("Video play error:", err);
+        setVideoError(true);
+      });
       setShowPoster(false);
     }
   };
 
   const handleVideoEnd = () => {
     nextScene();
+  };
+
+  const handleVideoError = () => {
+    setVideoError(true);
+    console.error("Video load error");
   };
 
   const handleSkip = () => {
@@ -43,18 +50,29 @@ export default function VideoScene({ nextScene }) {
             transition={{ duration: 0.5 }}
             onClick={handlePlay}
           >
-            <div className="play-button">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-            <p className="video-hint">点击播放视频</p>
+            {videoError ? (
+              <>
+                <div className="error-icon">⚠️</div>
+                <p className="video-hint">视频加载失败</p>
+                <p className="video-error-hint">请检查网络后重试</p>
+              </>
+            ) : (
+              <>
+                <div className="play-button">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <p className="video-hint">点击播放视频</p>
+              </>
+            )}
           </motion.div>
         ) : (
           <video
             ref={videoRef}
             className="video-fullscreen"
             onEnded={handleVideoEnd}
+            onError={handleVideoError}
             playsInline
             controls
           >
