@@ -7,9 +7,6 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: var(--bg-dark);
-  background: linear-gradient(135deg, #0a0a1a, #1a0a2e);
-  animation: pulse 10s ease-in-out infinite;
 }
 
 .btn {
@@ -17,10 +14,6 @@
   border: none;
   border-radius: 24px;
   font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: inherit;
 }
 
 .btn-primary {
@@ -45,10 +38,4 @@
 .btn-glass:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: scale(1.05);
-}
-
-/* Pulse animation for background */
-@keyframes pulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.1); }
 }

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { CONFIG } from "../data/config";
 import "./LoginScene.css";
-
-const VALID_NAME = "唐艺";
-const VALID_BIRTHDAY = "05-27";
 
 export default function LoginScene({ nextScene }) {
   const [name, setName] = useState("");
@@ -22,7 +20,7 @@ export default function LoginScene({ nextScene }) {
       return;
     }
 
-    if (trimmedName === VALID_NAME && trimmedBirthday === VALID_BIRTHDAY) {
+    if (trimmedName === CONFIG.validName && trimmedBirthday === CONFIG.validBirthday) {
       setError("");
       nextScene();
     } else {
