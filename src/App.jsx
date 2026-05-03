@@ -7,7 +7,6 @@ import ExamScene from "./scenes/ExamScene";
 import VideoScene from "./scenes/VideoScene";
 import EndingScene from "./scenes/EndingScene";
 import MusicPlayer from "./components/MusicPlayer";
-import VideoBackground from "./components/VideoBackground";
 import "./App.css";
 
 const SCENE_MAP = {
@@ -26,7 +25,6 @@ function App() {
 
   return (
     <div className="app">
-      <VideoBackground />
       <CurrentScene nextScene={nextScene} />
       {scene !== "login" && <MusicPlayer />}
     </div>
