@@ -1,17 +1,20 @@
-import { useRef, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { CONFIG } from "../data/config";
 import "./VideoScene.css";
 
 export default function VideoScene({ nextScene }) {
   const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showPoster, setShowPoster] = useState(true);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.play().catch(() => {});
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+      setShowPoster(false);
     }
-  }, []);
+  };
 
   const handleVideoEnd = () => {
     nextScene();
@@ -32,17 +35,32 @@ export default function VideoScene({ nextScene }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <video
-          ref={videoRef}
-          className="video-fullscreen"
-          onEnded={handleVideoEnd}
-          playsInline
-          autoPlay
-          muted
-          controls
-        >
-          <source src={CONFIG.videoSrc} type="video/mp4" />
-        </video>
+        {showPoster ? (
+          <motion.div
+            className="video-poster"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            onClick={handlePlay}
+          >
+            <div className="play-button">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <p className="video-hint">点击播放视频</p>
+          </motion.div>
+        ) : (
+          <video
+            ref={videoRef}
+            className="video-fullscreen"
+            onEnded={handleVideoEnd}
+            playsInline
+            controls
+          >
+            <source src={CONFIG.videoSrc} type="video/mp4" />
+          </video>
+        )}
       </motion.div>
 
       <motion.button
